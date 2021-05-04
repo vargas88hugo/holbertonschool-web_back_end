@@ -6,8 +6,8 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class BasicCache(BaseCaching):
-    """ 
-    Basic Cache
+    """ BaseCache defines:
+      - overwrite functions 'put' and 'get'
     """
 
     def put(self, key, item):
