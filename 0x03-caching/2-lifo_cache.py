@@ -1,14 +1,14 @@
 #!/usr/bin/python3
-""" 1. FIFO caching
+""" 2. LIFO Caching
 """
 from datetime import datetime
 BaseCaching = __import__('base_caching').BaseCaching
 
 
-class FIFOCache(BaseCaching):
+class LIFOCache(BaseCaching):
     """ BaseCache defines:
       - overwrite functions 'put' and 'get' for implement
-      FIFO caching system
+      LIFO caching system
     """
     def __init__(self):
         """ Initiliaze
@@ -18,7 +18,8 @@ class FIFOCache(BaseCaching):
 
     def put(self, key, item):
         """
-        Assign to the dictionary key and item
+        Assign to the dictionary self.cache_data the item
+        value for the key key
         """
         if key and item:
             self.cache_by_time[key] = datetime.now()
@@ -27,10 +28,10 @@ class FIFOCache(BaseCaching):
                 sorted_dict_keys = sorted(
                                           self.cache_by_time,
                                           key=self.cache_by_time.get)
-                first_in_key_element = sorted_dict_keys[0]
-                del self.cache_by_time[first_in_key_element]
-                del self.cache_data[first_in_key_element]
-                print('DISCARD: {}'.format(first_in_key_element))
+                penultimate_in__key_element = sorted_dict_keys[-2]
+                del self.cache_by_time[penultimate_in__key_element]
+                del self.cache_data[penultimate_in__key_element]
+                print('DISCARD: {}'.format(penultimate_in__key_element))
 
     def get(self, key):
         """
